@@ -3,7 +3,7 @@ import random
 from .phrase import Phrase
 
 class Game():
-    
+
     phrases = [
         Phrase('Hello World'),
         Phrase('Hello Mother'),
@@ -81,4 +81,4 @@ class Game():
             new_game = Game()
             new_game.start()
         else:
-            print('\nGoodbye!')
+            print('\nGoodbye and thank you for playing!')
