@@ -3,12 +3,13 @@ import random
 from .phrase import Phrase
 
 class Game():
-    phrase_1 = Phrase('Hello World')
-    phrase_2 = Phrase('Hello Mother')
-    phrase_3 = Phrase('Hello Father')
-    phrase_4 = Phrase('Here I am at')
-    phrase_5 = Phrase('Camp Granada')
-    phrases = [phrase_1, phrase_2, phrase_3, phrase_4, phrase_5]
+    phrases = [
+        Phrase('Hello World'),
+        Phrase('Hello Mother'),
+        Phrase('Hello Father'),
+        Phrase('Here I am at'),
+        Phrase('Camp Granada'),
+    ]
 
     def __init__(self):
         self.phrases = Game.phrases
@@ -22,6 +23,7 @@ class Game():
         self.play_game()
         print('\n', self.game_over(win=self.is_winner()), '\n')
         print('The phrase was:', self.active_phrase.phrase.upper())
+        self.ask_to_play_again()
 
     def is_loser(self):
         return self.missed == 5
@@ -35,14 +37,16 @@ class Game():
                 break
 
             print(self.active_phrase.display(), '\n')
-            try:
-                guess = self.get_guess()
-                result = self.active_phrase.check_letter(guess)
-                if result is False:
-                    self.missed += 1
-            except ValueError as err:
-                print(err)
+            self.handle_guess()
             print(f'{5 - self.missed} misses remaining!')
+
+    def handle_guess(self):
+        try:
+            result = self.active_phrase.check_letter(self.get_guess())
+            if result is False:
+                self.missed += 1
+        except ValueError as err:
+            print(err)
 
     def welcome(self):
         return 'Welcome to the phrase hunting game!\n'+\
@@ -58,8 +62,17 @@ class Game():
         return random.choice(self.phrases)
 
     def get_guess(self):
-        guess = input('Guess a letter:  ').lower() # needs validation
+        guess = input('Guess a letter:  ').lower()
         if len(guess) > 1 or guess not in 'abcdefghijklmnopqrstuvwxyz':
-            raise ValueError("Please pick one letter.")
+            raise ValueError('Please pick one letter.')
         self.guesses.append(guess)
         return guess
+
+    def ask_to_play_again(self):
+        answer = input('\nSend Y to play again or any other key to quit:  ')
+        if answer.lower() == 'y':
+            print('\n')
+            new_game = Game()
+            new_game.start()
+        else:
+            print('\nGoodbye!')
