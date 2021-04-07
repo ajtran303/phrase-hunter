@@ -3,6 +3,7 @@ import random
 from .phrase import Phrase
 
 class Game():
+    
     phrases = [
         Phrase('Hello World'),
         Phrase('Hello Mother'),
@@ -21,7 +22,7 @@ class Game():
         self.active_phrase = self.get_random_phrase()
         print(self.welcome())
         self.play_game()
-        print('\n', self.game_over(win=self.is_winner()), '\n')
+        print('\n', self.game_over(self.is_winner()), '\n')
         print('The phrase was:', self.active_phrase.phrase.upper())
         self.ask_to_play_again()
 
@@ -53,7 +54,7 @@ class Game():
                '- Lose by missing five (5) guesses!\n'+\
                '- Quit with `<control>+C` or `<control>+D`\n'
 
-    def game_over(self, win=False):
+    def game_over(self, win):
         return {
             False: 'Game over! You lose!',
             True: 'You won! Game over!'
@@ -75,6 +76,7 @@ class Game():
     def ask_to_play_again(self):
         answer = input('\nSend Y to play again or any other key to quit:  ')
         if answer.lower() == 'y':
+            self.active_phrase.reset()
             print('\n')
             new_game = Game()
             new_game.start()

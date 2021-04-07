@@ -53,6 +53,9 @@ class Phrase():
             underscores.append(' '.join(characters))
         return '   '.join(underscores)
 
+    def reset(self):
+        self.underscored_phrase = self.set_underscores(self.phrase, init=True)
+
     def validate_phrase(self, phrase):
         if ' ' not in phrase or phrase == ' ':
             raise ValueError('Phrase must be more than one word')
