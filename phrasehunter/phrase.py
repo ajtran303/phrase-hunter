@@ -12,3 +12,6 @@ class Phrase():
             underscores.append(word)
 
         return '   '.join(underscores)
+
+    def check_letter(self, letter):
+        pass

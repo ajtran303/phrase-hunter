@@ -8,13 +8,13 @@ class SmokeTest(unittest.TestCase):
         my_phrase = Phrase('Hello World')
 
         self.assertIsInstance(my_phrase, Phrase)
-        self.assertEqual(my_phrase.phrase, 'Hello World')
+        self.assertEqual(my_phrase.phrase, 'hello world')
 
     def test_it_exists_with_different_attributes(self):
         my_phrase = Phrase('Hello Friends')
 
         self.assertIsInstance(my_phrase, Phrase)
-        self.assertEqual(my_phrase.phrase, 'Hello Friends')
+        self.assertEqual(my_phrase.phrase, 'hello friends')
 
 
 class LetterCheckingTest(unittest.TestCase):
