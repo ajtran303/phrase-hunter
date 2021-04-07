@@ -7,3 +7,6 @@ if __name__ == '__main__':
     except EOFError:
         print('\n\nGoodbye!')
         quit()
+    except KeyboardInterrupt:
+        print('\n\nGoodbye!')
+        quit()
