@@ -5,7 +5,6 @@ class Phrase():
         self.phrase = phrase.lower()
         self.phrase_map = self.set_phrase_map(self.phrase)
         self.underscores = self.set_underscores(self.phrase, init=True)
-        self.guessed_letters = list()
 
     def display(self):
         return self.underscores
@@ -18,7 +17,6 @@ class Phrase():
                 characters[index] = letter
             characters = ''.join(characters)
             self.underscores = self.set_underscores(characters)
-            self.guessed_letters.append(letter)
             return True
         except KeyError:
             return False

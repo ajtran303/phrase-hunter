@@ -35,7 +35,6 @@ class Game():
         while True:
             if self.is_loser() or self.is_winner():
                 break
-
             print(self.active_phrase.display(), '\n')
             self.handle_guess()
             print(f'{5 - self.missed} misses remaining!')
@@ -49,8 +48,10 @@ class Game():
             print(err)
 
     def welcome(self):
-        return 'Welcome to the phrase hunting game!\n'+\
-               'To QUIT early press `<control> + D`'
+        return 'Welcome to the Phrase Hunting game!\n'+\
+               '- Win by guessing all the letters!\n'+\
+               '- Lose by missing five (5) guesses!\n'+\
+               '- Quit with `<control>+C` or `<control>+D`\n'
 
     def game_over(self, win=False):
         return {
@@ -65,7 +66,10 @@ class Game():
         guess = input('Guess a letter:  ').lower()
         if len(guess) > 1 or guess not in 'abcdefghijklmnopqrstuvwxyz':
             raise ValueError('Please pick one letter.')
-        self.guesses.append(guess)
+        elif guess in self.guesses:
+            raise ValueError(f'You already guessed `{guess}`')
+        else:
+            self.guesses.append(guess)
         return guess
 
     def ask_to_play_again(self):
