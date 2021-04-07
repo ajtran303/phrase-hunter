@@ -1,7 +1,7 @@
 class Phrase():
 
     def __init__(self, phrase):
-        self.phrase = phrase.lower()
+        self.phrase = self.validate_phrase(phrase)
         self.phrase_map = self.set_phrase_map(self.phrase)
         self.underscores = self.set_underscores(self.phrase, init=True)
         self.guessed_letters = list()
@@ -50,3 +50,15 @@ class Phrase():
                 characters = [character for character in word]
             underscores.append(' '.join(characters))
         return '   '.join(underscores)
+
+    def validate_phrase(self, characters):
+        if type(characters) != str:
+            raise TypeError('Must be a string')
+        if ' ' not in characters:
+            raise ValueError('Phrase must be more than one word')
+        valid_characters = 'abcdefghijklmnopqrstuvwxyz '
+        characters = characters.lower()
+        for character in characters:
+            if character not in valid_characters:
+                raise ValueError(f'{character} is not a letter or space')
+        return characters
