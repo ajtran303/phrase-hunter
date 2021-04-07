@@ -24,6 +24,13 @@ class LetterCheckingTest(unittest.TestCase):
 
         self.assertEqual(my_phrase.display(), '_ _ _ _ _   _ _ _ _ _')
 
+    def test_it_displays_letters_when_wrong_letters_checked(self):
+        my_phrase = Phrase('Hello World')
+        my_phrase.check_letter('x')
+
+        self.assertEqual(my_phrase.display(), '_ _ _ _ _   _ _ _ _ _')
+
+
     def test_it_displays_letters_when_letters_checked(self):
         my_phrase = Phrase('Hello World')
         my_phrase.check_letter('o')
