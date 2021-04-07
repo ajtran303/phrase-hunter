@@ -1,9 +1,17 @@
 import random
 
-class Game():
+from .phrase import Phrase
 
-    def __init__(self, *phrases):
-        self.phrases = list(phrases)
+class Game():
+    phrase_1 = Phrase('Hello World')
+    phrase_2 = Phrase('Hello Mother')
+    phrase_3 = Phrase('Hello Father')
+    phrase_4 = Phrase('Here I am at')
+    phrase_5 = Phrase('Camp Granada')
+    phrases = (phrase_1, phrase_2, phrase_3, phrase_4, phrase_5)
+
+    def __init__(self):
+        self.phrases = Game.phrases
         self.missed = 0
         self.active_phrase = None
         self.guesses = []
@@ -37,7 +45,6 @@ class Game():
         return 'Welcome to the phrase hunting game!'
 
     def game_over(self, win=False):
-        # ends the game too?
         return {
             False: 'Game over! You lose!',
             True: 'You won! Game over!'
