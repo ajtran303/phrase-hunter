@@ -8,7 +8,7 @@ class Game():
     phrase_3 = Phrase('Hello Father')
     phrase_4 = Phrase('Here I am at')
     phrase_5 = Phrase('Camp Granada')
-    phrases = (phrase_1, phrase_2, phrase_3, phrase_4, phrase_5)
+    phrases = [phrase_1, phrase_2, phrase_3, phrase_4, phrase_5]
 
     def __init__(self):
         self.phrases = Game.phrases
@@ -35,14 +35,18 @@ class Game():
                 break
 
             print(self.active_phrase.display(), '\n')
-            guess = self.get_guess()
-            result = self.active_phrase.check_letter(guess)
-            if result is False:
-                self.missed += 1
+            try:
+                guess = self.get_guess()
+                result = self.active_phrase.check_letter(guess)
+                if result is False:
+                    self.missed += 1
+            except ValueError as err:
+                print(err)
             print(f'{5 - self.missed} misses remaining!')
 
     def welcome(self):
-        return 'Welcome to the phrase hunting game!'
+        return 'Welcome to the phrase hunting game!\n'+\
+               'To QUIT early press `<control> + D`'
 
     def game_over(self, win=False):
         return {
@@ -55,5 +59,7 @@ class Game():
 
     def get_guess(self):
         guess = input('Guess a letter:  ').lower() # needs validation
+        if len(guess) > 1 or guess not in 'abcdefghijklmnopqrstuvwxyz':
+            raise ValueError("Please pick one letter.")
         self.guesses.append(guess)
         return guess
